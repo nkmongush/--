@@ -330,27 +330,26 @@ document.addEventListener('DOMContentLoaded', function () {
         const resultsDiv = document.getElementById('results');
         const checkTestButton = document.getElementById('checkTestButton');
         const resetTestButton = document.getElementById('resetTestButton');
-        // Error handling: Check for missing elements
         if (!quizDiv || !resultsDiv || !checkTestButton || !resetTestButton) {
             const errorMsg = "Ошибка: Не найдены элементы формы теста. Проверьте ID в HTML.";
             console.error(errorMsg);
             if (resultsDiv) {
-                resultsDiv.innerHTML = `<p style="color: red;">${errorMsg}</p>`; //Display error to user
+                resultsDiv.innerHTML = `<p style="color: red;">${errorMsg}</p>`;
             }
-            return; //Exit early if elements are missing
+            return;
         }
 
         checkTestButton.addEventListener('click', function (event) {
             event.preventDefault();
-            resultsDiv.innerHTML = ''; // Clear previous results
+            resultsDiv.innerHTML = '';
 
             const answers = {
                 q1: 'солдат-76',
-                q2: 'Сотрясение земли',
+                q2: 'молот, щит, рывок',
                 q3: 'C',
                 q4: 'A',
                 q5: 'D',
-                q6: 'B'
+                q6: 'A'
             };
 
             let score = 0;
@@ -360,7 +359,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 for (let i = 1; i <= 6; i++) {
                     const question = `q${i}`;
                     let userAnswer;
-                    //Error handling: Different question types
                     if (question === 'q1' || question === 'q2') {
                         userAnswer = quizDiv.querySelector(`input[name="${question}"]`).value.toLowerCase();
                     } else {
@@ -386,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             } catch (error) {
                 console.error("Ошибка при проверке ответов:", error);
-                resultsDiv.innerHTML = `<p style="color: red;">Произошла ошибка при проверке ответов.</p>`; //Display error to the user
+                resultsDiv.innerHTML = `<p style="color: red;">Произошла ошибка при проверке ответов.</p>`;
             }
         });
         resetTestButton.addEventListener('click', function (event) {
