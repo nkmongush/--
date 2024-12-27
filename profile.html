@@ -3,45 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Overwatch 2 - Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overwatch 2 - Профиль</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="slide" id="registration-slide">
-        <form name="auth" novalidate>
-            <input type="text" id="nameInput" name="name" pattern="^[А-ЯЁ][а-яё]+" required>
-            <label for="nameInput">Имя </label>
-            <input type="date" name="date" id="dateInput" min="1900-01-01" max="2024-11-02" required>
-            <label for="dateInput">Дата рождения</label>
-            <label>Пол:</label><br>
-            <input type="radio" name="gender" value="Мужской" checked="true"> Мужской<br>
-            <input type="radio" name="gender" value="Женский"> Женский<br>
-            <input type="submit" value="Зарегистрироваться">
-        </form>
-        <div id="result"></div>
-    </div>
-
     <header>
+        <div id="logo">
+            <img src="img/your-logo.png" alt="Your Logo">
+        </div>
         <nav>
             <ul>
+                <li><a href="index.html" id="mainPageLink">Главное</a></li>
                 <li><a href="heroes.html">Герои</a></li>
                 <li><a href="gallery.html">Галерея</a></li>
                 <li><a href="test.html">Тест</a></li>
-                <li><a href="glossary.html">словарь</a></li>
+                <li><a href="glossary.html">Словарь</a></li>
                 <li><a href="description.html">Описание</a></li>
-                <li><a href="profile.html" id="current">профиль</a></li>
+                <li><a href="profile.html">профиль</a></li>
             </ul>
         </nav>
     </header>
-
-    <div class="slide" id="profile-slide" style="display:none;">
-        <div id="name"></div>
-        <div id="date"></div>
-        <div id="gender"></div>
-        <button id="btn">Редактировать</button>
-    </div>
-
+    <main id="content">
+        <div class="slide" id="profile-slide">
+            <h2>Ваш профиль</h2>
+            <div id="name"></div>
+            <div id="date"></div>
+            <div id="gender"></div>
+            <button id="editProfile">Редактировать</button>
+            <form id="editForm" style="display:none;">
+                <input type="text" id="editName" pattern="^[А-ЯЁ][а-яё]+$" required placeholder="Имя" />
+                <input type="date" id="editDate" required placeholder="Дата рождения" />
+                <label>Пол:</label><br>
+                <input type="radio" name="editGender" value="Мужской" checked="true"> Мужской<br>
+                <input type="radio" name="editGender" value="Женский"> Женский<br>
+                <button type="submit">Сохранить изменения</button>
+                <div id="editResult"></div>
+            </form>
+            <div id="result"></div>
+        </div>
+    </main>
     <footer>
         <div>Контакты: <a href="tel:+7945582409">Телефон</a> | <a href="#">Соц. сети</a></div>
         <div>&copy; 2024 [Начын.М]</div>

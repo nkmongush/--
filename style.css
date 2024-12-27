@@ -1,6 +1,7 @@
 /* Общие стили */
 body {
     font-family: 'Arial', sans-serif;
+    /* Задаем шрифт для всего тела */
     margin: 0;
     padding: 0;
     background-color: #1a1410;
@@ -45,6 +46,7 @@ header nav ul li a {
     padding: 8px 12px;
     transition: background-color 0.3s ease;
     border-radius: 4px;
+    font-family: 'Arial', sans-serif;
 }
 
 header nav ul li a:hover {
@@ -55,6 +57,7 @@ header nav ul li a:hover {
 header nav ul li a#current {
     background-color: #ff8f00;
     color: #1a1410;
+    font-family: 'Arial', sans-serif;
 }
 
 header nav ul li a#current:hover {
@@ -89,6 +92,8 @@ main h1 {
     text-align: center;
     margin-bottom: 30px;
     line-height: 1.4;
+    font-family: 'Arial', sans-serif;
+    /* Задаем шрифт для h1 */
 }
 
 #content h1 {
@@ -107,6 +112,10 @@ footer {
     width: 100%;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
     margin-top: auto;
+}
+
+footer div {
+    font-family: 'Arial', sans-serif;
 }
 
 
@@ -161,6 +170,7 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin: 0 10px;
+    font-family: 'Arial', sans-serif;
 }
 
 .prev-button:hover,
@@ -180,6 +190,7 @@ footer {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     color: #f0e2d4;
+    font-family: 'Arial', sans-serif;
 }
 
 .slide input[type="text"],
@@ -190,6 +201,7 @@ footer {
     border-radius: 4px;
     background-color: #2c221b;
     color: #f0e2d4;
+    font-family: 'Arial', sans-serif;
 }
 
 .slide input[type="radio"] {
@@ -204,6 +216,7 @@ footer {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
 }
 
 .slide input[type="submit"]:hover {
@@ -214,6 +227,7 @@ footer {
     margin-top: 20px;
     text-align: center;
     width: 100%;
+    font-family: 'Arial', sans-serif;
 }
 
 #btn {
@@ -225,6 +239,7 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    font-family: 'Arial', sans-serif;
 }
 
 #btn:hover {
@@ -242,10 +257,12 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     color: #f0e2d4;
     margin: 20px auto;
+    font-family: 'Arial', sans-serif;
 }
 
 #quiz div {
     margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
 }
 
 #quiz input[type="text"],
@@ -256,6 +273,7 @@ footer {
     color: #f0e2d4;
     border: none;
     padding: 5px;
+    font-family: 'Arial', sans-serif;
 }
 
 #quiz input[type="submit"] {
@@ -269,6 +287,7 @@ footer {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Arial', sans-serif;
 }
 
 #quiz input[type="submit"]:hover {
@@ -289,6 +308,7 @@ footer {
     background-color: #2c221b;
     color: #f0e2d4;
     margin-right: 10px;
+    font-family: 'Arial', sans-serif;
 }
 
 .search-container button {
@@ -299,6 +319,7 @@ footer {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
 }
 
 .search-container button:hover {
@@ -308,6 +329,7 @@ footer {
 #searchResults {
     text-align: center;
     margin-top: 20px;
+    font-family: 'Arial', sans-serif;
 }
 
 /* Стили для вкладок */
@@ -315,6 +337,7 @@ footer {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
 }
 
 .tab-button {
@@ -326,7 +349,7 @@ footer {
     margin: 0 5px;
     border-radius: 5px 5px 0 0;
     transition: background-color 0.3s ease;
-
+    font-family: 'Arial', sans-serif;
 }
 
 .tab-button:hover {
@@ -336,19 +359,54 @@ footer {
 .tab-button.active {
     background-color: #ff8f00;
     color: #1a1410;
+    font-family: 'Arial', sans-serif;
 }
 
 .tab-content {
     padding: 20px;
     display: none;
+    font-family: 'Arial', sans-serif;
 }
 
 .tab-content.active {
     display: block;
 }
 
-/* Стили для героев*/
+.content-section {
+    margin-bottom: 30px;
+    padding: 0px;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+}
 
+.content-section h2 {
+    color: #ffb347;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+.content-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #ff8f00;
+    color: #1a1410;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.action-button:hover {
+    background-color: #d17200;
+}
+
+/* Стили для героев*/
 .hero-card {
     display: flex;
     align-items: center;
@@ -358,6 +416,7 @@ footer {
     padding: 10px;
     border-radius: 8px;
     background-color: #2c221b;
+    font-family: 'Arial', sans-serif;
 }
 
 .hero-card img {
@@ -369,48 +428,161 @@ footer {
 
 .hero-info {
     flex: 1;
+    font-family: 'Arial', sans-serif;
 }
 
-/* Стили для header */
-header {
-    background-color: #2c221b;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-header nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-}
-
-header nav ul li {
-    margin-left: 15px;
-}
-
-header nav ul li a {
-    color: #f0e2d4;
-    text-decoration: none;
-    padding: 8px 12px;
-    transition: background-color 0.3s ease;
+#editForm input[type="text"],
+#editForm input[type="date"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #4a3d34;
     border-radius: 4px;
-}
-
-header nav ul li a:hover {
     background-color: #332b26;
-    text-decoration: none;
+    color: #f0e2d4;
+    font-family: 'Arial', sans-serif;
 }
 
-header nav ul li a#current {
+#editForm button {
     background-color: #ff8f00;
     color: #1a1410;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
 }
 
-header nav ul li a#current:hover {
-    text-decoration: none;
+#editForm button:hover {
     background-color: #d17200;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+.modal-content {
+    background-color: #2c221b;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    color: #f0e2d4;
+    font-family: 'Arial', sans-serif;
+}
+
+.close-modal {
+    color: #f0e2d4;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #332b26;
+    color: #f0e2d4;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Стили для табов */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background-color: #332b26;
+    color: #f0e2d4;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    border-bottom: 1px solid transparent;
+}
+
+.tab-button:hover {
+    background-color: #4a3d34;
+}
+
+.tab-button.active {
+    border-bottom: 1px solid #ff8f00;
+    background-color: #4a3d34;
+}
+
+.tab-content {
+    padding: 10px;
+    background-color: #25201d;
+    border: 1px solid #4a3d34;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Стили для блоков героев */
+.hero-classes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* Разрешаем перенос на новую строку */
+    margin-top: 20px;
+}
+
+.hero-class {
+    flex-basis: 30%;
+    /* Занимает примерно треть пространства */
+    padding: 10px;
+    border: 1px solid #4a3d34;
+    background-color: #332b26;
+    margin-bottom: 20px;
+}
+
+.hero-class h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #ff8f00;
+    font-family: 'Arial', sans-serif;
+
+}
+
+.heroes-list {
+    list-style: none;
+    /* Убираем маркеры списка */
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.heroes-list li {
+    margin-bottom: 5px;
+    color: #f0e2d4;
 }

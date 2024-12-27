@@ -9,20 +9,40 @@
 </head>
 
 <body>
-    <div id="logo">
-        <img src="img/your-logo.png" alt="Your Logo">
+    <header>
+        <div id="logo">
+            <img src="img/your-logo.png" alt="Your Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="mainPageLink">Главное</a></li>
+                <li><a href="heroes.html">Герои</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="test.html">Тест</a></li>
+                <li><a href="glossary.html">Словарь</a></li>
+                <li><a href="description.html">Описание</a></li>
+                <li><a href="profile.html">профиль</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="slide" id="registration-slide">
+                <form name="auth" id="registrationForm" novalidate>
+                    <input type="text" id="nameInput" name="name" pattern="^[А-ЯЁ][а-яё]+" required>
+                    <label for="nameInput">Имя </label>
+                    <input type="date" name="date" id="dateInput" min="1900-01-01" max="2024-11-02" required>
+                    <label for="dateInput">Дата рождения</label>
+                    <label>Пол:</label><br>
+                    <input type="radio" name="gender" value="Мужской" checked="true"> Мужской<br>
+                    <input type="radio" name="gender" value="Женский"> Женский<br>
+                    <input type="submit" value="Зарегистрироваться">
+                </form>
+                <div id="result"></div>
+            </div>
+        </div>
     </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Главное</a></li>
-            <li><a href="heroes.html">Герои</a></li>
-            <li><a href="test.html">Тест</a></li>
-            <li><a href="glossary.html">словарь</a></li>
-            <li><a href="description.html" id="current">Описание</a></li>
-            <li><a href="profile.html">профиль</a></li>
-        </ul>
-    </nav>
-
     <main id="content">
         <div class="tabs">
             <button class="tab-button active" data-tab="overview">Обзор</button>
@@ -30,10 +50,8 @@
             <button class="tab-button" data-tab="heroes">Герои</button>
             <button class="tab-button" data-tab="maps">Карты</button>
         </div>
-
-
         <div class="tab-content active" id="overview">
-            <h2>Добро пожаловать на Overwatch 2!</h2>
+            <h2 id="greeting">Добро пожаловать на Overwatch 2!</h2>
             <p>Overwatch 2 - это динамичный шутер от первого лица с большим количеством героев, уникальными
                 способностями и разнообразными режимами игры. Наслаждайтесь захватывающим геймплеем и дружелюбной
                 атмосферой с друзьями!</p>
@@ -41,7 +59,6 @@
             <p>Здесь вы найдёте всё необходимое, чтобы узнать о мире Overwatch 2: от подробных описаний героев до
                 стратегий в различных режимах.</p>
         </div>
-
         <div class="tab-content" id="modes">
             <h2>Режимы игры Overwatch 2</h2>
             <p>Наслаждайтесь захватывающими режимами, каждый из которых требует определенной стратегии и умений.</p>
@@ -54,16 +71,41 @@
                 <li><strong>Аркады:</strong> Множество разнообразных аркадных режимов, где вы можете испытать всё!</li>
             </ul>
         </div>
-
         <div class="tab-content" id="heroes">
             <h2>Герои Overwatch 2</h2>
             <p>Узнайте о каждом герое и выберите себе нового фаворита!</p>
-            <p>Здесь представлена информация о 5 героях каждого класса (Танки, Урон, Поддержка).</p>
-            <ul>
-                <li><strong>Танки:</strong> Райнхардт, Орисса, Заря, Д.Ва, Уинстон</li>
-                <li><strong>Урон:</strong> Солдат-76, Трейсер, Жнец, Гэнцзи, Маккри</li>
-                <li><strong>Поддержка:</strong> Ангел, Лусио, Дзенъятта, Ана, Мойра</li>
-            </ul>
+            <div class="hero-classes">
+                <div class="hero-class">
+                    <h3>Танки</h3>
+                    <ul class="heroes-list">
+                        <li>Райнхардт</li>
+                        <li>Орисса</li>
+                        <li>Заря</li>
+                        <li>Д.Ва</li>
+                        <li>Уинстон</li>
+                    </ul>
+                </div>
+                <div class="hero-class">
+                    <h3>Урон</h3>
+                    <ul class="heroes-list">
+                        <li>Солдат-76</li>
+                        <li>Трейсер</li>
+                        <li>Жнец</li>
+                        <li>Гэндзи</li>
+                        <li>Маккри</li>
+                    </ul>
+                </div>
+                <div class="hero-class">
+                    <h3>Поддержка</h3>
+                    <ul class="heroes-list">
+                        <li>Ангел</li>
+                        <li>Лусио</li>
+                        <li>Дзенъятта</li>
+                        <li>Ана</li>
+                        <li>Мойра</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="tab-content" id="maps">
             <h2>Поля боя Overwatch 2</h2>
@@ -77,14 +119,11 @@
             </ul>
             <p>Список карт постоянно пополняется новыми локациями.</p>
         </div>
-
     </main>
-
     <footer>
         <div>Контакты: <a href="tel:+7945582409">Телефон</a> | <a href="#">Соц. сети</a></div>
-        <div>&copy; 2024 Overwatch 2</div>
+        <div>&copy; 2024 [Начын.М]</div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 

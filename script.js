@@ -1,66 +1,345 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const authForm = document.forms.auth;
-    const nameDiv = document.getElementById('name');
-    const dateDiv = document.getElementById('date');
-    const genderDiv = document.getElementById('gender');
-    const resultDiv = document.getElementById('result')
-    const repeatButton = document.getElementById('btn');
+    // ... existing code ...
+    const mainContent = document.getElementById('content');
+    const greetingText = mainContent.querySelector('#greeting');
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    let isRegistered = false;
+    // Функция генерации токена (простая)
+    function generateToken() {
+        return Math.random().toString(36).substring(2);
+    }
+    function setActiveNavLink(activeLink) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            if (event.target.getAttribute('href') !== '#') {
+                setActiveNavLink(this);
+            }
+        });
+    });
+    const currentPath = window.location.pathname;
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            setActiveNavLink(link);
+        }
+    });
 
-    authForm.addEventListener('submit', function (event) {
+    function updatePageViews() {
+        let pageViews = localStorage.getItem('pageViews') ? parseInt(localStorage.getItem('pageViews')) : 0;
+        pageViews++;
+        localStorage.setItem('pageViews', pageViews.toString());
+        console.log('Количество просмотров:', pageViews);
+    }
+    updatePageViews();
+
+    // Проверка если пользователь зарегистрирован
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+        enableSlides();
+        isRegistered = true
+    }
+    function enableSlides() {
+        console.log('Слайды разрешены');
+    }
+    if (isRegistered) {
+        enableSlides()
+    }
+
+    const modal = document.getElementById('registrationModal');
+    const registrationForm = document.getElementById('registrationForm');
+    const closeModal = document.querySelector('.close-modal');
+    const mainPageLink = document.getElementById('mainPageLink');
+
+    // Показать модальное окно при клике по ссылке
+    mainPageLink.addEventListener('click', function (event) {
         event.preventDefault();
+        modal.style.display = 'block';
+    });
 
+
+    // Закрыть модальное окно при клике на крестик
+    closeModal.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    // Закрыть модальное окно при клике вне модального окна
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+
+    registrationForm.addEventListener('submit', function (event) {
+        event.preventDefault();
         const nameInput = document.getElementById('nameInput');
         const dateInput = document.getElementById('dateInput');
-        const genderInput = authForm.elements.gender;
-
-        let nameValue = nameInput.value;
-        let dateValue = dateInput.value;
-        let genderValue = "";
-
-
-        for (const radio of genderInput) {
-            if (radio.checked) {
-                genderValue = radio.value;
+        const genderInputs = document.querySelectorAll('input[name="gender"]');
+        const name = nameInput.value;
+        const date = dateInput.value;
+        let gender;
+        genderInputs.forEach(input => {
+            if (input.checked) {
+                gender = input.value;
             }
-        }
-
+        });
         const namePattern = /^[А-ЯЁ][а-яё]+$/;
-        if (!namePattern.test(nameValue)) {
-            resultDiv.innerHTML = "Имя должно начинаться с заглавной буквы и содержать только кириллические буквы.";
-            resultDiv.style.color = 'red';
+        if (!namePattern.test(name)) {
+            alert("Имя должно начинаться с заглавной буквы и содержать только кириллические буквы.");
             return;
         }
+        if (name && date && gender) {
+            isRegistered = true;
+            modal.style.display = 'none';
+            // Сохраняем данные в localStorage
+            localStorage.setItem('registrationData', JSON.stringify({ name, date, gender }));
+            const token = generateToken();
+            localStorage.setItem('userToken', token);
+            enableSlides();
+            if (currentPath.includes('index.html')) {
+                const registrationData = localStorage.getItem('registrationData');
+                if (registrationData) {
+                    const data = JSON.parse(registrationData);
+                    greetingText.textContent = `Добро пожаловать, ${data.name}!`;
+                }
+            }
+            // Обновляем профиль, если находимся на странице профиля
+            if (currentPath.includes('profile.html')) {
+                updateProfileDisplay();
+            }
 
-        nameDiv.textContent = `Имя: ${nameValue}`;
-        dateDiv.textContent = `Дата рождения: ${dateValue}`;
-        genderDiv.textContent = `Пол: ${genderValue}`;
-        resultDiv.innerHTML = "";
+        } else {
+            alert('Пожалуйста, заполните все поля.');
+        }
     });
 
-    repeatButton.addEventListener('click', function () {
-        authForm.reset();
-        nameDiv.textContent = '';
-        dateDiv.textContent = '';
-        genderDiv.textContent = '';
-        resultDiv.innerHTML = "";
-        resultDiv.style.color = 'black';
-    });
+    if (currentPath.includes('index.html')) {
+        const registrationData = localStorage.getItem('registrationData');
+        if (registrationData) {
+            const data = JSON.parse(registrationData);
+            greetingText.textContent = `Добро пожаловать, ${data.name}!`;
+        }
+    }
 
+    function updateProfileDisplay() {
+        const profileSlide = document.getElementById('profile-slide');
+        const nameDiv = document.getElementById('name');
+        const dateDiv = document.getElementById('date');
+        const genderDiv = document.getElementById('gender');
+        const registrationData = localStorage.getItem('registrationData');
+        if (registrationData) {
+            const data = JSON.parse(registrationData);
+            nameDiv.textContent = `Имя: ${data.name}`;
+            dateDiv.textContent = `Дата рождения: ${data.date}`;
+            genderDiv.textContent = `Пол: ${data.gender}`;
+            profileSlide.style.display = 'block';
+        }
+    }
+
+    // Код для страницы профиля
+    if (currentPath.includes('profile.html')) {
+        updateProfileDisplay()
+        const profileSlide = document.getElementById('profile-slide');
+        const nameDiv = document.getElementById('name');
+        const dateDiv = document.getElementById('date');
+        const genderDiv = document.getElementById('gender');
+        const editProfileButton = document.getElementById('editProfile');
+        const editForm = document.getElementById('editForm');
+        const editResult = document.getElementById('editResult');
+        const registrationData = localStorage.getItem('registrationData');
+
+        editProfileButton.addEventListener('click', () => {
+            profileSlide.style.display = 'none';
+            editForm.style.display = 'block'
+
+            const editNameInput = document.getElementById('editName');
+            const editDateInput = document.getElementById('editDate');
+            const genderInputs = editForm.querySelectorAll('input[name="editGender"]');
+            const data = JSON.parse(registrationData);
+            editNameInput.value = data.name;
+            editDateInput.value = data.date;
+            genderInputs.forEach(input => {
+                if (input.value === data.gender) {
+                    input.checked = true
+                }
+            });
+
+        });
+        editForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const editNameInput = document.getElementById('editName');
+            const editDateInput = document.getElementById('editDate');
+            const genderInputs = editForm.querySelectorAll('input[name="editGender"]');
+            const editName = editNameInput.value;
+            const editDate = editDateInput.value;
+            let editGender;
+            genderInputs.forEach(input => {
+                if (input.checked) {
+                    editGender = input.value;
+                }
+            });
+            const namePattern = /^[А-ЯЁ][а-яё]+$/;
+            if (!namePattern.test(editName)) {
+                editResult.textContent = "Имя должно начинаться с заглавной буквы и содержать только кириллические буквы.";
+                editResult.style.color = 'red';
+                return;
+            }
+
+            const editData = { name: editName, date: editDate, gender: editGender }
+
+            localStorage.setItem('registrationData', JSON.stringify(editData));
+            updateProfileDisplay()
+            editForm.style.display = 'none';
+            editResult.textContent = "Профиль успешно изменён!";
+            editResult.style.color = 'green';
+            setTimeout(() => {
+                editResult.textContent = '';
+            }, 3000)
+        });
+
+    }
+
+
+    if (currentPath.includes('test.html')) {
+        const quizForm = document.getElementById('quiz');
+        const resultsDiv = document.getElementById('results');
+
+        quizForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const registrationData = localStorage.getItem('registrationData');
+            let userName = 'Пользователь';
+
+            if (registrationData) {
+                const data = JSON.parse(registrationData);
+                userName = data.name
+            }
+
+            let score = 0;
+            const answers = {
+                q1: 'Солдат-76',
+                q2: 'Сотрясение земли',
+                q3: 'C',
+                q4: 'A',
+                q5: 'D',
+                q6: 'A'
+            };
+            let resultsHTML = '';
+            for (const question of Object.keys(answers)) {
+                const userAnswer = document.querySelector(`input[name="${question}"]:checked, input[name="${question}"]`);
+                let correctAnswer = answers[question];
+                if (userAnswer) {
+                    let isCorrect;
+                    if (userAnswer.type === 'text') {
+                        if (userAnswer.value.trim() === '') {
+                            resultsHTML += `<p><span>❌</span> Вопрос ${question}: Вы не ответили. Правильный ответ: ${correctAnswer}.</p>`;
+                            continue;
+                        }
+                        isCorrect = userAnswer.value === correctAnswer;
+                    } else {
+                        isCorrect = userAnswer.value === correctAnswer
+                    }
+
+                    if (isCorrect) {
+                        score++;
+                        resultsHTML += `<p><span>✅</span> Вопрос ${question}: Ваш ответ верный.</p>`;
+                    } else {
+                        resultsHTML += `<p><span>❌</span> Вопрос ${question}: Ваш ответ неверный. Правильный ответ: ${correctAnswer}.</p>`;
+                    }
+
+                } else {
+                    resultsHTML += `<p><span>❌</span> Вопрос ${question}: Вы не ответили. Правильный ответ: ${correctAnswer}.</p>`;
+                }
+            }
+
+            resultsDiv.innerHTML = `${userName} Вы набрали ${score} из 6 баллов. <br> ${resultsHTML}`;
+            resultsDiv.style.backgroundColor = score >= 5 ? "lightgreen" : "lightcoral";
+            resultsDiv.style.padding = "10px";
+            resultsDiv.style.border = "1px solid #ccc";
+        });
+    }
+    const tabs = document.querySelector('.tabs');
+    const tabButtons = tabs.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+
+    function showTab(tabId) {
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        tabButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        const selectedTab = document.getElementById(tabId);
+        if (selectedTab) {
+            selectedTab.classList.add('active');
+            const selectedButton = document.querySelector(`button[data-tab="${tabId}"]`)
+            selectedButton.classList.add('active');
+        }
+    }
+
+    tabs.addEventListener('click', function (event) {
+        if (event.target.classList.contains('tab-button')) {
+            const tabId = event.target.getAttribute('data-tab');
+            showTab(tabId)
+        }
+    });
+    const firstTab = document.querySelector('.tab-button.active');
+    if (firstTab) {
+        showTab(firstTab.getAttribute('data-tab'))
+    }
 });
+//галерея
 document.addEventListener('DOMContentLoaded', function () {
+    const mainContent = document.getElementById('content');
+    const navLinks = document.querySelectorAll('header nav ul li a');
+
+    function setActiveNavLink(activeLink) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            if (event.target.getAttribute('href') !== '#') {
+                setActiveNavLink(this);
+            }
+        });
+    });
+
+    const currentPath = window.location.pathname;
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            setActiveNavLink(link);
+        }
+    });
+
+
     const gallery = document.querySelector('.gallery');
     const images = gallery.querySelectorAll('img');
     const prevButton = document.querySelector('.prev-button');
     const nextButton = document.querySelector('.next-button');
-
+    const imageCounter = document.getElementById('image-counter');
     let currentIndex = 0;
+
+    function updateCounter() {
+        imageCounter.textContent = `Картинка ${currentIndex + 1} / ${images.length}`;
+    }
 
     function updateCarousel() {
         images.forEach((img, index) => {
             img.style.display = 'none';
             img.classList.remove('active');
             img.style.opacity = 0;
-
             if (index === currentIndex) {
                 img.style.display = 'block';
                 img.classList.add('active');
@@ -69,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 10);
             }
         });
-
+        updateCounter()
         // Отключаем кнопку "Назад" на первом изображении
         if (currentIndex === 0) {
             prevButton.disabled = true;
@@ -93,7 +372,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
     updateCarousel();
 
     nextButton.addEventListener('click', function () {
@@ -110,248 +388,4 @@ document.addEventListener('DOMContentLoaded', function () {
             updateCarousel();
         }
     });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const gallery = document.querySelector('.gallery');
-    const images = gallery.querySelectorAll('img');
-    let currentIndex = 0;
-
-    function updateCarousel() {
-        images.forEach((img, index) => {
-            img.style.display = 'none';
-            img.classList.remove('active');
-
-            if (index === currentIndex) {
-                img.style.display = 'block';
-                img.classList.add('active');
-            }
-        });
-    }
-
-    updateCarousel();
-
-    gallery.addEventListener('click', function (event) {
-        if (event.target === gallery) {
-            currentIndex++;
-            if (currentIndex >= images.length) {
-                currentIndex = 0;
-            }
-            updateCarousel();
-        }
-    });
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'ArrowLeft') {
-            currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = images.length - 1;
-            }
-            updateCarousel();
-        } else if (event.key === 'ArrowRight') {
-            currentIndex++;
-            if (currentIndex >= images.length) {
-                currentIndex = 0;
-            }
-            updateCarousel();
-        }
-    });
-
-
-
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const mainContent = document.getElementById('content');
-    const text = mainContent.querySelector('h1');
-
-    const words = text.textContent.split(' ');
-    text.textContent = '';
-    let currentIndex = 0;
-
-    function animateWord() {
-        if (currentIndex < words.length) {
-            const wordSpan = document.createElement('span');
-            wordSpan.textContent = words[currentIndex] + ' ';
-            wordSpan.style.opacity = 0;
-            wordSpan.style.transition = 'opacity 0.5s ease-in-out';
-            mainContent.appendChild(wordSpan);
-
-
-            setTimeout(() => {
-                wordSpan.style.opacity = 1;
-            }, 10);
-
-            currentIndex++;
-            setTimeout(animateWord, 200);
-        }
-    }
-
-    animateWord();
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const authForm = document.forms.auth;
-    const nameDiv = document.getElementById('name');
-    const dateDiv = document.getElementById('date');
-    const genderDiv = document.getElementById('gender');
-    const resultDiv = document.getElementById('result');
-    const registrationSlide = document.getElementById('registration-slide');
-    const profileSlide = document.getElementById('profile-slide');
-
-    const repeatButton = document.getElementById('btn');
-    const userData = localStorage.getItem('userData');
-
-    function displayProfile(userData) {
-        const parsedData = JSON.parse(userData);
-        nameDiv.textContent = `Имя: ${parsedData.name}`;
-        dateDiv.textContent = `Дата рождения: ${parsedData.date}`;
-        genderDiv.textContent = `Пол: ${parsedData.gender}`;
-        registrationSlide.style.display = 'none';
-        profileSlide.style.display = 'flex';
-    }
-
-    if (userData) {
-        displayProfile(userData);
-    } else {
-        registrationSlide.style.display = 'flex';
-        profileSlide.style.display = 'none';
-    }
-
-
-    authForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const nameInput = document.getElementById('nameInput');
-        const dateInput = document.getElementById('dateInput');
-        const genderInput = authForm.elements.gender;
-
-        let nameValue = nameInput.value;
-        let dateValue = dateInput.value;
-        let genderValue = "";
-        for (const radio of genderInput) {
-            if (radio.checked) {
-                genderValue = radio.value;
-            }
-        }
-        const namePattern = /^[А-ЯЁ][а-яё]+$/;
-        if (!namePattern.test(nameValue)) {
-            resultDiv.innerHTML = "Имя должно начинаться с заглавной буквы и содержать только кириллические буквы.";
-            resultDiv.style.color = 'red';
-            return;
-        }
-
-        const userData = {
-            name: nameValue,
-            date: dateValue,
-            gender: genderValue
-        };
-
-        localStorage.setItem('userData', JSON.stringify(userData));
-        displayProfile(localStorage.getItem('userData'))
-
-        resultDiv.innerHTML = "";
-    });
-
-
-    repeatButton.addEventListener('click', function () {
-        authForm.reset();
-        nameDiv.textContent = '';
-        dateDiv.textContent = '';
-        genderDiv.textContent = '';
-        resultDiv.innerHTML = "";
-        resultDiv.style.color = 'black';
-        localStorage.removeItem('userData')
-        registrationSlide.style.display = 'flex';
-        profileSlide.style.display = 'none';
-    });
-
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const quizForm = document.getElementById('quiz');
-    const resultsDiv = document.getElementById('results');
-
-    quizForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        let score = 0;
-        const answers = {
-            q1: 'Солдат-76',
-            q2: 'Сотрясение земли',
-            q3: 'C',
-            q4: 'A',
-            q5: 'D',
-            q6: 'A'
-        };
-
-        for (const question of Object.keys(answers)) {
-            const userAnswer = document.querySelector(`input[name="${question}"]:checked`);
-
-            if (userAnswer) {
-                if (userAnswer.value === answers[question]) {
-                    score++;
-                }
-            }
-        }
-
-        resultsDiv.innerHTML = `Вы набрали ${score} из 6 баллов.`;
-        resultsDiv.style.backgroundColor = score >= 5 ? "lightgreen" : "lightcoral";
-        resultsDiv.style.padding = "10px";
-        resultsDiv.style.border = "1px solid #ccc";
-
-    });
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const glossaryData = {
-        "Танк": "Герой, способный поглощать большое количество урона и защищать свою команду.",
-        "Дамагер": "Герой, наносящий высокий урон противникам.",
-        "Поддержка": "Герой, который лечит и бафает союзников.",
-        "Ульта": "Ультимативная способность героя.",
-        "Контрпик": "Герой, наиболее эффективный против конкретного героя соперника."
-    };
-
-    const searchInput = document.getElementById('searchInput');
-    const searchButton = document.getElementById('searchButton');
-    const searchResults = document.getElementById('searchResults');
-
-    searchButton.addEventListener('click', function () {
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        searchResults.innerHTML = '';
-        if (!searchTerm) {
-            searchResults.textContent = 'Введите термин для поиска.';
-            return;
-        }
-        const found = Object.keys(glossaryData).find(key => key.toLowerCase() === searchTerm);
-        if (found) {
-            const term = found;
-            const definition = glossaryData[term];
-            searchResults.innerHTML = `
-                   <p><strong>${term}:</strong> ${definition}</p>
-               `;
-        } else {
-            searchResults.textContent = 'Термин не найден в словаре.';
-        }
-    });
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    function activateTab(tabId) {
-        tabContents.forEach(content => {
-            content.classList.remove('active');
-        });
-        tabButtons.forEach(button => {
-            button.classList.remove('active');
-        });
-        document.getElementById(tabId).classList.add('active');
-        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-    }
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const tabId = this.getAttribute('data-tab');
-            activateTab(tabId);
-        });
-    });
-    const initialTab = document.querySelector('.tab-button.active').getAttribute('data-tab');
-    if (initialTab) {
-        activateTab(initialTab)
-    }
 });
