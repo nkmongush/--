@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overwatch 2 - Официальный сайт фанатов</title>
+    <title>Overwatch 2 - Описание</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,109 +15,28 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html" id="mainPageLink">Главное</a></li>
+                <li><a href="index.html">Главное</a></li>
                 <li><a href="heroes.html">Герои</a></li>
                 <li><a href="gallery.html">Галерея</a></li>
                 <li><a href="test.html">Тест</a></li>
                 <li><a href="glossary.html">Словарь</a></li>
-                <li><a href="description.html">Описание</a></li>
+                <li><a href="description.html" id="current">Описание</a></li>
                 <li><a href="profile.html">профиль</a></li>
             </ul>
         </nav>
     </header>
-    <div id="registrationModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="slide" id="registration-slide">
-                <form name="auth" id="registrationForm" novalidate>
-                    <input type="text" id="nameInput" name="name" pattern="^[А-ЯЁ][а-яё]+" required>
-                    <label for="nameInput">Имя </label>
-                    <input type="date" name="date" id="dateInput" min="1900-01-01" max="2024-11-02" required>
-                    <label for="dateInput">Дата рождения</label>
-                    <label>Пол:</label><br>
-                    <input type="radio" name="gender" value="Мужской" checked="true"> Мужской<br>
-                    <input type="radio" name="gender" value="Женский"> Женский<br>
-                    <input type="submit" value="Зарегистрироваться">
-                </form>
-                <div id="result"></div>
-            </div>
-        </div>
-    </div>
     <main id="content">
-        <div class="tabs">
-            <button class="tab-button active" data-tab="overview">Обзор</button>
-            <button class="tab-button" data-tab="modes">Режимы игры</button>
-            <button class="tab-button" data-tab="heroes">Герои</button>
-            <button class="tab-button" data-tab="maps">Карты</button>
-        </div>
-        <div class="tab-content active" id="overview">
-            <h2 id="greeting">Добро пожаловать на Overwatch 2!</h2>
-            <p>Overwatch 2 - это динамичный шутер от первого лица с большим количеством героев, уникальными
-                способностями и разнообразными режимами игры. Наслаждайтесь захватывающим геймплеем и дружелюбной
-                атмосферой с друзьями!</p>
-            <img src="img/ow2_cover.jpg" alt="Overwatch 2">
-            <p>Здесь вы найдёте всё необходимое, чтобы узнать о мире Overwatch 2: от подробных описаний героев до
-                стратегий в различных режимах.</p>
-        </div>
-        <div class="tab-content" id="modes">
-            <h2>Режимы игры Overwatch 2</h2>
-            <p>Наслаждайтесь захватывающими режимами, каждый из которых требует определенной стратегии и умений.</p>
-            <ul>
-                <li><strong>Захват точек:</strong> Классический режим, где команды соревнуются в захвате и удержании
-                    контрольных точек.</li>
-                <li><strong>Сопровождение:</strong> Команды соревнуются в доставке груза по карте.</li>
-                <li><strong>Битва:</strong> Быстрый и динамичный режим с простыми правилами.</li>
-                <li><strong>Командные бои:</strong> Много новых режимов с уникальными правилами!</li>
-                <li><strong>Аркады:</strong> Множество разнообразных аркадных режимов, где вы можете испытать всё!</li>
-            </ul>
-        </div>
-        <div class="tab-content" id="heroes">
-            <h2>Герои Overwatch 2</h2>
-            <p>Узнайте о каждом герое и выберите себе нового фаворита!</p>
-            <div class="hero-classes">
-                <div class="hero-class">
-                    <h3>Танки</h3>
-                    <ul class="heroes-list">
-                        <li>Райнхардт</li>
-                        <li>Орисса</li>
-                        <li>Заря</li>
-                        <li>Д.Ва</li>
-                        <li>Уинстон</li>
-                    </ul>
-                </div>
-                <div class="hero-class">
-                    <h3>Урон</h3>
-                    <ul class="heroes-list">
-                        <li>Солдат-76</li>
-                        <li>Трейсер</li>
-                        <li>Жнец</li>
-                        <li>Гэндзи</li>
-                        <li>Маккри</li>
-                    </ul>
-                </div>
-                <div class="hero-class">
-                    <h3>Поддержка</h3>
-                    <ul class="heroes-list">
-                        <li>Ангел</li>
-                        <li>Лусио</li>
-                        <li>Дзенъятта</li>
-                        <li>Ана</li>
-                        <li>Мойра</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content" id="maps">
-            <h2>Поля боя Overwatch 2</h2>
-            <p>Погрузитесь в атмосферу каждой карты с захватывающими сражениями.</p>
-            <ul>
-                <li><strong>Нью-Йорк:</strong> </li>
-                <li><strong>Рио-де-Жанейро:</strong> </li>
-                <li><strong>Лондон:</strong> </li>
-                <li><strong>Токио:</strong> </li>
-                <li><strong>Храм Анубиса:</strong> </li>
-            </ul>
-            <p>Список карт постоянно пополняется новыми локациями.</p>
+        <div class="slide">
+            <h2>Описание игры Overwatch 2</h2>
+            <p>Overwatch 2 — это бесплатный командный шутер от первого лица, разработанный и выпущенный компанией
+                Blizzard Entertainment. Игра предназначена для кроссплатформенной игры, и в нее можно играть на
+                Windows, macOS, PlayStation 4, PlayStation 5, Xbox One, Xbox Series X/S и Nintendo Switch. </p>
+
+            <p>Overwatch 2 является продолжением Overwatch (2016) и ставит игроков в роли героев с уникальными
+                способностями, работающих вместе в командах, чтобы выполнить определенные цели в разнообразных режимах
+                игры. Overwatch 2 добавляет нового режима игры и нового контента, а также графических и технических
+                улучшений по сравнению с оригинальной игрой. </p>
+            <img src="img/ow3_cover.jpg" alt="Overwatch 2">
         </div>
     </main>
     <footer>

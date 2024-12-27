@@ -586,3 +586,135 @@ footer {
     margin-bottom: 5px;
     color: #f0e2d4;
 }
+
+.tab {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    background-color: #2c221b;
+    color: #f0e2d4;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button.active {
+    background-color: #ff8f00;
+    color: #1a1410;
+}
+
+.tab-button:hover {
+    background-color: #332b26;
+}
+
+.tab-content {
+    display: none;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#search-term {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    background-color: #332b26;
+    color: #f0e2d4;
+    border: 1px solid #4a3d34;
+    font-family: 'Arial', sans-serif;
+}
+
+#glossary-list {
+    list-style: none;
+    padding: 0;
+}
+
+#glossary-list li {
+    background-color: #332b26;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #4a3d34;
+    display: flex;
+    /* Чтобы разместить термин и определение в строку */
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #f0e2d4;
+}
+
+#glossary-list li .term {
+    font-weight: bold;
+    color: #ff8f00;
+}
+
+#glossary-list li .definition {
+    color: #f0e2d4;
+}
+
+/* Стили для словаря */
+#search-term {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    background-color: #332b26;
+    color: #f0e2d4;
+    border: 1px solid #4a3d34;
+    font-family: 'Arial', sans-serif;
+}
+
+#glossary-list {
+    list-style: none;
+    padding: 0;
+}
+
+#glossary-list li {
+    background-color: #332b26;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #4a3d34;
+    display: flex;
+    /* Чтобы разместить термин и определение в строку */
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #f0e2d4;
+}
+
+#glossary-list li .term {
+    font-weight: bold;
+    color: #ff8f00;
+}
+
+#glossary-list li .definition {
+    color: #f0e2d4;
+}
+
+/* Стили для кнопок поиска */
+#search-button,
+#end-search-button {
+    padding: 10px 20px;
+    background-color: #ff8f00;
+    color: #332b26;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+}
+
+#search-button:hover,
+#end-search-button:hover {
+    background-color: #d67700;
+}
