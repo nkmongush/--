@@ -718,3 +718,39 @@ footer {
 #end-search-button:hover {
     background-color: #d67700;
 }
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Стили для кнопок в тесте */
+#quiz button {
+    background-color: #4caf50;
+    color: white;
+}
+
+#quiz button:hover {
+    background-color: #367c39;
+}
+
+/* Стили для кнопок в профиле*/
+#editForm button,
+#profile-slide button {
+    background-color: #3498db;
+    color: white;
+}
+
+#editForm button:hover,
+#profile-slide button:hover {
+    background-color: #217dbb;
+}
